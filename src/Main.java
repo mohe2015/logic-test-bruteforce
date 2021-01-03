@@ -19,15 +19,15 @@ public class Main {
 		}
 	}
 	
-	static void bruteforceF1(Codeline[] f0, Codeline[] function, int index) {
-		if (index == function.length) {
-			emulate(f0, function);
+	static void bruteforceF1(Codeline[] f0, Codeline[] f1, int index) {
+		if (index == f1.length) {
+			emulate(f0, f1);
 		} else {
 			for (Condition condition : Condition.values()) {
 				for (Action action : Action.values()) {
-					function[index].condition = condition;
-					function[index].action = action;
-					bruteforceF1(f0, function, index + 1);
+					f1[index].condition = condition;
+					f1[index].action = action;
+					bruteforceF1(f0, f1, index + 1);
 				}
 			}
 		}
@@ -36,7 +36,7 @@ public class Main {
 	static Field field = new Field();
 	
 	static void emulate(Codeline[] f0, Codeline[] f1) {
-		boolean debug = Math.random() < 0.00000001;
+		boolean debug = false;//Math.random() < 0.00000001;
 		
 		if (debug) {
 			System.out.println("--------------------------------");
@@ -63,7 +63,6 @@ public class Main {
 				
 				switch (pcf[pc].condition) {
 					case UNCONDITIONAL: {
-								
 						break;
 					}
 					case GREEN: {
